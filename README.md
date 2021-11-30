@@ -29,6 +29,7 @@
 # Features
 
 - Everything will be stored in your your **local machine**.
+- All your data will be stored **Encrypted**.
 - Set Unlock Key and Encryption Key
 - Unlock Key will be used every time you want to CRUD your credentials.
 - Encryption Key will be used to Reset your Unlock Key, incase you forgot it.
