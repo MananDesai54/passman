@@ -23,7 +23,8 @@
     "start2": "ts-node ./src/passman.js",
     "dev": "nodemon ./dist/passman.js",
     "dev2": "nodemon --exec ts-node ./src/passman.ts",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "compile": "tsc"
   },
   "dependencies": {
     "clipboardy": "^3.0.0",
