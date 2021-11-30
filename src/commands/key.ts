@@ -2,7 +2,7 @@ import "colors";
 import inquirer from "inquirer";
 import { KeyManager } from "../lib/KeyManager.js";
 import { CredManager } from "../lib/CredManager.js";
-import { isRequired } from "../utils/validation.js";
+import { isRequired, securityCheckForKey } from "../utils/validation.js";
 import {
   decryptMessage,
   encryptMessage,
@@ -64,29 +64,17 @@ export const key = {
   async showKey(): Promise<void> {
     console.log();
     const keyManger = new KeyManager();
-    if (!keyManger.isKeySet()) {
-      const credManager = new CredManager();
-      if (credManager.isCredExists()) {
-        console.log(
-          "Someone modified the  file where credentials are stored, Please reset all the credential by using `passman clear` as file is corrupted"
-            .red
-        );
-        return;
-      }
-      console.log(
-        "You haven't set Unlock key, set using `passman key set`".red
-      );
-      return;
-    }
-    const input = await inquirer.prompt([
-      {
-        type: "password",
-        name: "encryptionKey",
-        message: "Enter Encryption key to see the Unlock key".green,
-        validate: isRequired,
-      },
-    ]);
     try {
+      securityCheckForKey();
+      const input = await inquirer.prompt([
+        {
+          type: "password",
+          name: "encryptionKey",
+          message: "Enter Encryption key to see the Unlock key".green,
+          validate: isRequired,
+        },
+      ]);
+
       const unlockKey = decryptMessage(
         keyManger.getKey("encrypted"),
         input.encryptionKey
@@ -107,21 +95,8 @@ export const key = {
   resetKey: async (): Promise<void> => {
     console.log();
     const keyManger = new KeyManager();
-    if (!keyManger.isKeySet()) {
-      const credManager = new CredManager();
-      if (credManager.isCredExists()) {
-        console.log(
-          "Someone modified the  file where credentials are stored, Please reset all the credential by using `passman clear` as file is corrupted"
-            .red
-        );
-        return;
-      }
-      console.log(
-        "You haven't set Unlock key, set using `passman key set`".red
-      );
-      return;
-    }
     try {
+      securityCheckForKey();
       const input2 = await inquirer.prompt([
         {
           type: "password",

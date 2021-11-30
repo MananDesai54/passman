@@ -15,6 +15,7 @@ program
     "--host <hostname>",
     "Get credential by `hostname in CSV` format or use `all` to get all"
   )
+  .option("--all", "To show all the stored values")
   .action((cmd) => cred.show(cmd));
 
 program
