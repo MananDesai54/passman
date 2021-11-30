@@ -25,5 +25,3 @@
 # If by any chance it shows `passman command not found` then you can use it by this command also
 4b. yarn start -h # instead of passman use `yarn start`
 ```
-
-# If you don't want to do this by yourself then NPM package is coming soon
