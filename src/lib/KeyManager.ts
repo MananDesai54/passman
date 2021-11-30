@@ -1,4 +1,9 @@
 import ConfigStore from "configstore";
+import { decryptMessage, encryptMessage } from "../utils/cryptoAlgo.js";
+
+// const ConfigStore = await eval('import("configstore")') as Promise<
+//   typeof import("configstore")
+// >;
 
 export class KeyManager {
   private conf: ConfigStore;
@@ -7,9 +12,9 @@ export class KeyManager {
     this.conf = new ConfigStore("passman");
   }
 
-  public setKey(key: string): boolean {
+  public setKey(keys: { encryptedKey: string; hashedKey: string }): boolean {
     try {
-      this.conf.set("key", key);
+      this.conf.set("key", encryptMessage(JSON.stringify(keys), "mykey"));
       return true;
     } catch (error: any) {
       console.log(error.message);
@@ -18,21 +23,17 @@ export class KeyManager {
   }
 
   public isKeySet(): boolean {
-    return !!this.conf.get("key");
+    return this.conf.get("key");
   }
 
-  public getKey(): string {
+  public getKey(type: "encrypted" | "hashed"): string {
     const key = this.conf.get("key");
     if (!key) {
       throw new Error(
         "No key found, please set one by using `passman key set`"
       );
     }
-    return key;
-  }
-
-  public resetKey(): boolean {
-    console.log("Think on how to reset");
-    return true;
+    const keys = JSON.parse(decryptMessage(key, "mykey"));
+    return type === "hashed" ? keys.hashedKey : keys.encryptedKey;
   }
 }

@@ -2,32 +2,40 @@
   "name": "passman",
   "version": "1.0.0",
   "description": "Password manager CLI",
-  "main": "passman.js",
+  "exports": "./dist/passman.js",
   "author": "Manan Desai",
   "license": "MIT",
   "bin": "./dist/passman.js",
   "devDependencies": {
+    "@types/clipboardy": "^2.0.1",
     "@types/colors": "^1.2.1",
     "@types/commander": "^2.12.2",
     "@types/configstore": "^5.0.1",
     "@types/crypto-js": "^4.0.2",
+    "@types/figlet": "^1.5.4",
     "@types/inquirer": "^8.1.3",
     "@types/node": "^16.11.10",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.2"
   },
   "scripts": {
-    "start": "node ./bin/app.js",
-    "start2": "ts-node ./src/app.js",
-    "dev": "nodemon ./bin/app.js",
-    "dev2": "nodemon --exec ts-node ./src/app.ts",
+    "start": "node ./dist/passman.js",
+    "start2": "ts-node ./src/passman.js",
+    "dev": "nodemon ./dist/passman.js",
+    "dev2": "nodemon --exec ts-node ./src/passman.ts",
     "watch": "tsc -w"
   },
   "dependencies": {
+    "clipboardy": "^3.0.0",
     "colors": "^1.4.0",
     "commander": "^8.3.0",
     "configstore": "^6.0.0",
     "crypto-js": "^4.1.1",
+    "figlet": "^1.5.2",
     "inquirer": "^8.2.0"
+  },
+  "type": "module",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   }
 }

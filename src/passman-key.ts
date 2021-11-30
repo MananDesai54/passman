@@ -1,5 +1,5 @@
 import { Command } from "commander";
-import { key } from "./commands/key";
+import { key } from "./commands/key.js";
 
 const program = new Command();
 
