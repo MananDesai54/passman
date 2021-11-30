@@ -25,3 +25,18 @@
 # If by any chance it shows `passman command not found` then you can use it by this command also
 4b. yarn start -h # instead of passman use `yarn start`
 ```
+
+# Features
+
+- Everything will be stored in your your **local machine**.
+- Set Unlock Key and Encryption Key
+- Unlock Key will be used every time you want to CRUD your credentials.
+- Encryption Key will be used to Reset your Unlock Key, incase you forgot it.
+- CRUD Credentials
+- Generate Strong password
+- Backup all the Credentials you stored
+- There will be more run `passman -h`
+
+# Note
+
+- There is some redundant code.
