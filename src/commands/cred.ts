@@ -3,7 +3,6 @@ import { KeyManager } from "../lib/KeyManager.js";
 import "colors";
 import inquirer from "inquirer";
 import { isRequired } from "../utils/validation.js";
-import clipboardy from "clipboardy";
 import { key } from "./key.js";
 
 export const cred = {
@@ -73,13 +72,17 @@ export const cred = {
     }
   },
   show: async (cmd: any): Promise<void> => {
+    if (!cmd.host) {
+      console.log("Please provide host by passing --host=HOST_NAME".red);
+      return;
+    }
     const credManager = new CredManager();
     const keyManager = new KeyManager();
     try {
       if (!keyManager.isKeySet()) {
         if (credManager.isCredExists()) {
           console.log(
-            "Someone modified the cred directly in the file, Please reset all the credential by using `passman clear` and start from beginning"
+            "Someone modified the  file where credentials are stored, Please reset all the credential by using `passman clear` as file is corrupted"
           );
         }
         console.log("Please set key first by `passman key set`".red);
@@ -104,9 +107,7 @@ export const cred = {
       console.log(error.message.red);
     }
   },
-  update: (): void => {
-    console.log("Update cred");
-  },
+  update: async (cmd: any): Promise<void> => {},
   remove: (): void => {
     console.log("Remove cred");
   },

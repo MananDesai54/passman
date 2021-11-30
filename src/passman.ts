@@ -22,4 +22,9 @@ program
     "Set credential for site, You can add site name, password and username. Username is optional."
   )
   .command("generate", "Generate secure password.")
+  .command("clear", "Clear all the details you stored.")
+  .command(
+    "backup",
+    "Backup you data, you data will be copied to clipboard then you can store it wherever you want"
+  )
   .parse(process.argv);

@@ -39,8 +39,12 @@ export class CredManager {
     return !!this.conf.get("credentials");
   }
 
-  getCred(hosts: string[], encryptionKey: string): Credential[] | boolean {
-    let encryptedCredList = this.conf.get("credentials");
+  getCred(
+    hosts: string[],
+    encryptionKey: string,
+    all = false
+  ): Credential[] | boolean {
+    const encryptedCredList = this.conf.get("credentials");
     if (!encryptedCredList) {
       throw new Error(
         "You haven't set any credential yet use `passman cred set` to set one"
@@ -50,10 +54,38 @@ export class CredManager {
       decryptMessage(encryptedCredList, encryptionKey)
     );
     const credentials: Credential[] = [];
+    if (all) {
+      return credList;
+    }
     hosts.forEach((host) => {
       credentials.push(...credList.filter((cred) => cred.host.includes(host)));
     });
     return credentials || false;
+  }
+
+  updateCred(credential: Credential, encryptionKey: string): boolean {
+    const encryptedCredList = this.conf.get("credentials");
+    if (!encryptedCredList) {
+      throw new Error(
+        "You haven't set any credential yet use `passman cred set` to set one"
+      );
+    }
+    try {
+      let credList: Array<Credential> = JSON.parse(
+        decryptMessage(encryptedCredList, encryptionKey)
+      );
+      credList = credList.map((cred) =>
+        cred.host.includes(credential.host) ? credential : cred
+      );
+      this.conf.set(
+        "credentials",
+        encryptMessage(JSON.stringify(credList), encryptionKey)
+      );
+      return true;
+    } catch (error) {
+      console.log(error.message.red);
+      return false;
+    }
   }
 
   updateEncryption(oldEncryptionKey: string, encryptionKey: string): void {

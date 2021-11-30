@@ -8,16 +8,23 @@ import {
   encryptMessage,
   hashMessage,
 } from "../utils/cryptoAlgo.js";
-import clipboardy from "clipboardy";
+import clipboard from "clipboardy";
 
 export const key = {
   setKey: async (): Promise<void> => {
     console.log();
     const keyManager = new KeyManager();
+    const credManager = new CredManager();
     if (keyManager.isKeySet()) {
       console.log(
         "You had already set the key. If you want to reset then run `passman key reset`"
           .yellow
+      );
+      return;
+    } else if (credManager.isCredExists()) {
+      console.log(
+        "Someone modified the  file where credentials are stored, Please reset all the credential by using `passman clear` as file is corrupted"
+          .red
       );
       return;
     }
@@ -58,6 +65,14 @@ export const key = {
     console.log();
     const keyManger = new KeyManager();
     if (!keyManger.isKeySet()) {
+      const credManager = new CredManager();
+      if (credManager.isCredExists()) {
+        console.log(
+          "Someone modified the  file where credentials are stored, Please reset all the credential by using `passman clear` as file is corrupted"
+            .red
+        );
+        return;
+      }
       console.log(
         "You haven't set Unlock key, set using `passman key set`".red
       );
@@ -81,7 +96,7 @@ export const key = {
         console.log("Invalid Encryption key!!!!".red);
         return;
       }
-      await clipboardy.write(unlockKey);
+      await clipboard.write(unlockKey);
       console.log(
         "\nSuccess!! Your Unlock key  has been copied to your clipboard.".green
       );
@@ -93,6 +108,14 @@ export const key = {
     console.log();
     const keyManger = new KeyManager();
     if (!keyManger.isKeySet()) {
+      const credManager = new CredManager();
+      if (credManager.isCredExists()) {
+        console.log(
+          "Someone modified the  file where credentials are stored, Please reset all the credential by using `passman clear` as file is corrupted"
+            .red
+        );
+        return;
+      }
       console.log(
         "You haven't set Unlock key, set using `passman key set`".red
       );

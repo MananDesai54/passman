@@ -20,11 +20,16 @@ program
 program
   .command("update")
   .description("Update credential for an account")
+  .option("--host <hostname>", "Update credential by hostname")
   .action(cred.update);
 
 program
   .command("remove")
   .description("Remove one or all credentials")
+  .option(
+    "--host <hostname>",
+    "Remove credential by `hostname in CSV` format or use `all` to get all"
+  )
   .action(cred.remove);
 
 program.parse(process.argv);
