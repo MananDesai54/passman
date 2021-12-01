@@ -7,6 +7,15 @@
 
 # How to use it?
 
+## Download as a global npm package
+
+```sh
+yarn global add passman # for yarn
+npm i -g passman # for npm
+```
+
+## Set up from scratch
+
 - clone the repo
 - Well You need `Nodejs` and 'Yarn'
 

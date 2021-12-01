@@ -1,11 +1,26 @@
 {
   "name": "passman",
   "version": "1.0.0",
-  "description": "Password manager CLI",
+  "description": "Password manager CLI built with Typescript, commander and crypto-js",
   "exports": "./dist/passman.js",
   "author": "Manan Desai",
   "license": "MIT",
+  "main": "./dist/passman.js",
   "bin": "./dist/passman.js",
+  "keywords": [
+    "Password manager",
+    "cli",
+    "password",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MananDesai54/passman.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MananDesai54/passman/issues"
+  },
+  "homepage": "https://github.com/MananDesai54/passman/blob/master/README.md",
   "devDependencies": {
     "@types/clipboardy": "^2.0.1",
     "@types/colors": "^1.2.1",
