@@ -1,6 +1,6 @@
 {
-  "name": "passman",
-  "version": "1.0.0",
+  "name": "passman-cli",
+  "version": "1.0.2",
   "description": "Password manager CLI built with Typescript, commander and crypto-js",
   "exports": "./dist/passman.js",
   "author": "Manan Desai",

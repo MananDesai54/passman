@@ -9,9 +9,11 @@
 
 ## Download as a global npm package
 
+- [passman-cli](https://www.npmjs.com/package/passman-cli)
+
 ```sh
-yarn global add passman # for yarn
-npm i -g passman # for npm
+yarn global add passman-cli # for yarn
+npm i -g passman-cli # for npm
 ```
 
 ## Set up from scratch
@@ -30,7 +32,7 @@ npm i -g passman # for npm
 
 # if linking not work by any way then no worry go to 4b below
 
-4a. passman -h # see the help and do accordingly
+4a. passman-cli -h # see the help and do accordingly
 # If by any chance it shows `passman command not found` then you can use it by this command also
 4b. yarn start -h # instead of passman use `yarn start`
 ```
@@ -45,7 +47,7 @@ npm i -g passman # for npm
 - CRUD Credentials
 - Generate Strong password
 - Backup all the Credentials you stored
-- There will be more run `passman -h`
+- There will be more run `passman-cli -h`
 
 # Note
 
